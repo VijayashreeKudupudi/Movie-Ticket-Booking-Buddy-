@@ -7,7 +7,7 @@ const movieSelect = document.getElementById('movie');
 populateUI();
 
 let ticketPrice = +movieSelect.value; //+sign before makes string to number type
-// console.log(ticketPrice);
+// console.log(ticketPrice); 
 
 //to clear all selected seats
 const clear = document.querySelector('.circle');
@@ -46,12 +46,21 @@ function setMovieData(movieIndex, moviePrice) {
 //Get data from localStorage and populate UI
 function populateUI() {
     const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
-    console.log(selectedSeats);
+    const occupiedSeats = JSON.parse(localStorage.getItem('occupiedSeats'));
+    //console.log(selectedSeats);
 
     if(selectedSeats !== null && selectedSeats.length > 0) {
         seats.forEach((seat, index) => {
             if(selectedSeats.indexOf(index) > -1) {
                 seat.classList.add('selected');
+            }
+        });
+    }
+
+    if(occupiedSeats !== null && occupiedSeats.length > 0) {
+        seats.forEach((seat, index) => {
+            if(occupiedSeats.indexOf(index) > -1) {
+                seat.classList.add('occupied');
             }
         });
     }
@@ -90,7 +99,14 @@ updateSelectedCount();
 
 //Clearing all the seats selected
 clear.addEventListener('click', (e) =>{
-    localStorage.clear();
+
+    Object.keys(localStorage).forEach(key => {
+        if (key !== "occupiedSeats") {
+            localStorage.removeItem(key)
+        }
+    });
+
+    // localStorage.clear();
     seats.forEach(seat => {
         seat.classList.remove('selected');
     })
@@ -102,11 +118,25 @@ clear.addEventListener('click', (e) =>{
 payment.addEventListener('click', e => {
     
     const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
     if(selectedSeats !== null && selectedSeats.length > 0) {
         seats.forEach((seat, index) => {
             if(selectedSeats.indexOf(index) > -1) {
                 seat.classList.add('occupied');
             }
         });
+        const occupiedSeats = document.querySelectorAll('.row .seat.occupied');
+        const seatsIndex = [...occupiedSeats].map(seat => [...seats].indexOf(seat));  
+        localStorage.setItem('occupiedSeats', JSON.stringify(seatsIndex));
+    
     }
+
+    alert(`Payment Done! $${total.innerText}`)
+    Object.keys(localStorage).forEach(key => {
+        if (key !== "occupiedSeats") {
+            localStorage.removeItem(key)
+        }
+    });
+    count.innerText = 0;
+    total.innerText = 0;
 })
