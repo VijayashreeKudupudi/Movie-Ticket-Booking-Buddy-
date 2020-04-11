@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #242333;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.movie-container select {
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 5px 15px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.seat.selected {
+    background-color: #6feaf6;
+}
+
+.seat.occupied {
+    background-color: #fff;
+}
+
+/*to separate last 2 coloumns from left and right side*/
+.seat:nth-of-type(2){
+    margin-right: 20px;
+}
+
+.seat:nth-last-of-type(2){
+    margin-left: 20px;
+} 
+
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    list-style: none;
+    border-radius: 5px;
+    color: #777;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+}
+
+.showcase li small {
+    margin-left: 5px;
+}
+
+.screen {
+    background-color: #fff;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.container {
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+p.text {
+    color: #fff;
+    padding-top: 5px;
+}
+
+p.text span {
+    color: #6feaf6;
+    margin: 5px 0;
+}
+
+/*trial*/
+.circle {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 120px 3px;
+}
+
+.before,
+.after {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #777;
+    border-radius: 0;
+    top: 15px;
+    transition: 150ms ease-out;
+    z-index: 0;
+    display: flex;
+}
+
+.before {
+    left: 5px;
+}
+
+.after {
+    transform: rotate(-90deg);
+    right: 6px;
+}
+
+.circle:hover {
+    border: 1px solid #717171;
+    padding-bottom: 1px;
+}
+
+.circle:hover .before {    
+    left: 7px;
+    transform: rotate(225deg);
+    transition: 300ms ease-in-out all;
+}
+
+.circle:hover .after {
+    right: 6px;
+    transform: rotate(-225deg);
+    transition: 250ms ease-in all;
+}
+
+#payment {
+    display: flex;
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 5px 15px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
